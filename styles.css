@@ -117,3 +117,19 @@ body {
     align-items: center;
 
 }
+
+/* Hover Style */
+.digit-number:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  color: yellow; /* Change text color on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+
+.action-calc:hover {
+  background-color: #24bb68; /* Darker blue on hover */
+  color: yellow; /* Change text color on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+  transition: all 0.3s ease; /* Smooth transition for changes */
+}
+

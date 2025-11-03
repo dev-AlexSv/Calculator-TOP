@@ -32,7 +32,7 @@ function operate(num1, num2, operator) {
     }
 }
 
-
+const calculatorBody = document.querySelector("body");
 const digits = document.querySelector(".digits");
 const actions = document.querySelector(".actions");
 let displayInput = document.querySelector(".display-input")
@@ -43,6 +43,8 @@ let num1 = "";
 let num2 = "";
 let result = "";
 let operator = "";
+
+let operators = ["+", "-", "x", "/"];
 
 digits.addEventListener('click', (event) => {
     if (event.target.parentNode === digits) {
@@ -93,3 +95,47 @@ actions.addEventListener('click', (event) => {
         }
     }
 });
+
+calculatorBody.addEventListener("keypress", logKey);
+
+function logKey(e) {
+    console.log(e.key);
+
+    if (!isNaN(e.key)) {
+        const digit = e.key
+        displayInput.textContent += digit;
+
+        if (isSecondNumber) {
+            num2 += digit;
+        } else {
+            num1 += digit;
+        }
+    } else if (operators.includes(e.key)) {
+        if (num1 && num2 && e.key) {
+            result = operate(num1, num2, e.key);
+            displayResult.textContent = result;
+            num1 = result.toString();
+            num2 = "";
+        }
+
+        displayInput.textContent += e.key;
+        operator = e.key;
+        isSecondNumber = true;
+    } else if (e.key.toLowerCase() === "c") {
+        displayInput.textContent = "";
+        displayResult.textContent = "";
+        num1 = "";
+        num2 = "";
+        operator = "";
+        isSecondNumber = false;
+    } else if (e.key === "=") {
+        if (num1 && num2 && operator) {
+            result = operate(num1, num2, operator);
+            displayResult.textContent = result;
+            num1 = result.toString();
+            num2 = "";
+            operator = "";
+            isSecondNumber = false;
+        }
+    }
+}
